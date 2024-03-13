@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Analisis Sonarqube') {
             steps {
-                def sonarqubeScannerHome = tool name: 'sonarqubeScanner', type: 'sonar-scanner'
+                def sonarqubeScannerHome = tool name: 'sonar', type: 'sonar-scanner'
                 withCredentials([string(credentialsId: 'sonar', variable: 'sonarLogin')]) {
                     sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectName=TestSonar -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.sources=src/ -Dsonar.tests=test/"
                 }
